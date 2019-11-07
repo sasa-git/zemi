@@ -16,8 +16,8 @@ def sendLEDdata(data, ser, rclk, srclk):
         GPIO.output(srclk, GPIO.HIGH)
         GPIO.output(srclk, GPIO.LOW)
     
-    GPIO.output(rclk, HIGH)
-    GPIO.output(rclk, LOW)
+    GPIO.output(rclk, GPIO.HIGH)
+    GPIO.output(rclk, GPIO.LOW)
 
 SER = 25
 RCLK = 24
@@ -35,7 +35,7 @@ LED_data_list = [[1, 1, 0], [1, 0, 1], [0, 1, 1]]
 
 try:
     while True:
-        if GPIO.input(INPUT_SWITCH) == GPIO.HIGH:
+        if GPIO.input(INPUT_SWITCH) == GPIO.LOW:
             for LEDdata in LED_data_list:
                 sendLEDdata(LEDdata, SER, RCLK, SRCLK)
                 sleep(1)

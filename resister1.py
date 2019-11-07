@@ -16,8 +16,8 @@ def sendLEDdata(data, ser, rclk, srclk):
         GPIO.output(srclk, GPIO.HIGH)
         GPIO.output(srclk, GPIO.LOW)
     
-    GPIO.output(rclk, HIGH)
-    GPIO.output(rclk, LOW)
+    GPIO.output(rclk, GPIO.HIGH)
+    GPIO.output(rclk, GPIO.LOW)
 
 SER = 25
 RCLK = 24
@@ -40,6 +40,7 @@ try:
         sleep(1)
         sendLEDdata(LEDdata3, SER, RCLK, SRCLK)
         sleep(1)
+        print('done!')
 
 # Ctrl+C を押すことで、例外 KeyboardInterrupt が発生→except ~~ でその例外を補足、pass でWhile処理を抜ける
 except KeyboardInterrupt:

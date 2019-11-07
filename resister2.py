@@ -35,12 +35,14 @@ LED_data_list = [[1, 1, 0], [1, 0, 1], [0, 1, 1]]
 
 try:
     while True:
-        if GPIO.input(INPUT_SWITCH) == GPIO.LOW:
+        if GPIO.input(INPUT_SWITCH) == GPIO.HIGH: # 押すとひかる
             for LEDdata in LED_data_list:
                 sendLEDdata(LEDdata, SER, RCLK, SRCLK)
                 sleep(1)
+                print("blighted!")
         else:
             sendLEDdata([0,0,0], SER, RCLK, SRCLK)
+            print("stop")
 
 # Ctrl+C を押すことで、例外 KeyboardInterrupt が発生→except ~~ でその例外を補足、pass でWhile処理を抜ける
 except KeyboardInterrupt:

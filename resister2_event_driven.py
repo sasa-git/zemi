@@ -16,17 +16,17 @@ def sendLEDdata(data, ser, rclk, srclk):
         GPIO.output(srclk, GPIO.HIGH)
         GPIO.output(srclk, GPIO.LOW)
     
-    GPIO.output(rclk, HIGH)
-    GPIO.output(rclk, LOW)
+    GPIO.output(rclk, GPIO.HIGH)
+    GPIO.output(rclk, GPIO.LOW)
 
-def callback_LED_blight
-    print('called!')
+def callback_LED_blight(gpio_pin):
+    print('called! %s' % gpio_pin)
     for LEDdata in LED_data_list:
         sendLEDdata(LEDdata, SER, RCLK, SRCLK)
         sleep(1)
 
-def callback_reset_LED
-    print('reset!')
+def callback_reset_LED(gpio_pin):
+    print('reset! %s' % gpio_pin)
     sendLEDdata([0,0,0], SER, RCLK, SRCLK)
 
 SER = 25
@@ -42,8 +42,8 @@ GPIO.setup(RCLK, GPIO.OUT)
 GPIO.setup(SRCLK, GPIO.OUT)
 GPIO.setup(INPUT_SWITCH, GPIO.IN)
 
-GPIO.add_event_detect(INPUT_SWITCH, GPIO.FALLING, callback=callback_LED_blight, bouncetime=100)
-GPIO.add_event_detect(INPUT_SWITCH, GPIO.RISING, callback=callback_reset_LED, bouncetime=100)
+GPIO.add_event_detect(INPUT_SWITCH, GPIO.FALLING, callback=callback_reset_LED, bouncetime=100)
+GPIO.add_event_detect(INPUT_SWITCH, GPIO.RISING, callback=callback_LED_blight, bouncetime=100)
 
 try:
     while True:

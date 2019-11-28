@@ -33,7 +33,7 @@ LEDdataList = [[0,1,1], [1,0,1], [1,1,0]]
 try:
     while True:
         for LEDdata in LEDdataList:
-            reversedList = LEDdata[::-1]
+            reversedList = LEDdata[::-1] # スライスhttps://note.nkmk.me/python-reverse-reversed/
             sendLEDdata(reversedList, SER, RCLK, SRCLK)
             sleep(1)
         print('done!')

@@ -28,21 +28,17 @@ GPIO.setup(SER, GPIO.OUT)
 GPIO.setup(RCLK, GPIO.OUT)
 GPIO.setup(SRCLK, GPIO.OUT)
 
-LEDdata1 = [1, 1, 0]
-LEDdata2 = [1, 0, 1]
-LEDdata3 = [0, 1, 1]
+LEDdataList = [[0,1,1], [1,0,1], [1,1,0]]
 
 try:
     while True:
-        sendLEDdata(LEDdata1, SER, RCLK, SRCLK)
-        sleep(1)
-        sendLEDdata(LEDdata2, SER, RCLK, SRCLK)
-        sleep(1)
-        sendLEDdata(LEDdata3, SER, RCLK, SRCLK)
-        sleep(1)
+        for LEDdata in LEDdataList:
+            sendLEDdata(LEDdata.reverse(), SER, RCLK, SRCLK)
+            sleep(1)
         print('done!')
 
 # Ctrl+C を押すことで、例外 KeyboardInterrupt が発生→try文内から抜ける→except KeyboardInterruptで例外を補足、例外処理に移る→pass(null operation)で例外処理は何もせずに終わる。
 except KeyboardInterrupt:
     pass
-    GPIO.cleanup()
+
+GPIO.cleanup()

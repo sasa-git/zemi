@@ -33,8 +33,8 @@ LEDdataList = [[0,1,1], [1,0,1], [1,1,0]]
 try:
     while True:
         for LEDdata in LEDdataList:
-            fixedLEDdata = LEDdata.reverse()
-            sendLEDdata(fixedLEDdata, SER, RCLK, SRCLK)
+            LEDdata.reverse()
+            sendLEDdata(LEDdata, SER, RCLK, SRCLK)
             sleep(1)
         print('done!')
 

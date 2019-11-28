@@ -42,7 +42,7 @@ try:
         sleep(1)
         print('done!')
 
-# Ctrl+C を押すことで、例外 KeyboardInterrupt が発生→except ~~ でその例外を補足、pass でWhile処理を抜ける
+# Ctrl+C を押すことで、例外 KeyboardInterrupt が発生→try文内から抜ける→except KeyboardInterruptで例外を補足、例外処理に移る→pass(null operation)で例外処理は何もせずに終わる。
 except KeyboardInterrupt:
     pass
     GPIO.cleanup()

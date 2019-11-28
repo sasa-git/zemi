@@ -45,5 +45,4 @@ try:
 # Ctrl+C を押すことで、例外 KeyboardInterrupt が発生→except ~~ でその例外を補足、pass でWhile処理を抜ける
 except KeyboardInterrupt:
     pass
-
-GPIO.cleanup()
+    GPIO.cleanup()

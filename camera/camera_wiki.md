@@ -1,4 +1,8 @@
 # openCVについて
+
+**ちゃんとしたWikiの方に移動しました**
+[リンクはこちら](https://github.com/sasasoni/zemi/wiki/OpenCV_wiki)
+
 基本ここでは4.2.0版について説明します
 
 [公式Wiki(4.2.0版)](https://docs.opencv.org/4.2.0/index.html)

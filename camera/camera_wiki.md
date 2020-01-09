@@ -99,3 +99,39 @@ if key == ord('q'):
 [顔認識2](https://kokensha.xyz/raspberry-pi/raspberry-pi-opencv-video-face-detection/)
 
 [ラズパイカメラで遊ぼう](http://blog.livedoor.jp/victory7com/archives/27752962.html)
+
+## おまけ camera-test.pyの解説
+
+```py
+import picamera
+import picamera.array
+import cv2
+
+# カメラ初期化 PiCamera()で生成したオブジェクトをcamera変数で扱う
+with picamera.PiCamera() as camera:
+    # カメラの画像をリアルタイムで取得するための処理
+    with picamera.array.PiRGBArray(camera) as stream:
+        # 解像度の設定
+        camera.resolution = (320,240)
+        
+        while True:
+             # カメラから映像を取得する（OpenCVへ渡すために、各ピクセルの色の並びを"BGR"の順番にする）
+            camera.capture(stream, 'bgr', use_video_port=True)
+            # カメラから取得した映像を表示する 第一引数でウィンドウの名前を指定
+            cv2.imshow('frame', stream.array)
+
+            # cv2.waitKey() はキーボード入力を処理する関数です．引数は入力待ち時間でミリ秒単位で指定します．この関数は，指定された時間だけキーボード入力を受け付けます．入力待ちの間に何かのキーを打てば，プログラムはそれ以降の処理を実行します．引数に 0 を指定した時は，何かしらのキーを打つまでキー入力を無期限で待ち続けます．以下で説明しますが，特定のキー入力のみを待つ(例えば a のみを待つ)ことも可能です．
+            # & 0xFFについては## waitKey(0) についてる0xFFって何？ 参照
+            # ord('q')でqをアスキーコードに変換
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                # while を抜ける
+                break
+            # カメラから読み込んだ映像を破棄する
+            # seek(0) ファイルの先頭に移動
+            stream.seek(0)
+            # ストリームのサイズを、指定された size バイト (または size が指定されていない場合、現在位置) に変更
+            stream.truncate()
+
+        # imshowで出した画面を消去
+        cv2.destroyAllWindows()
+```

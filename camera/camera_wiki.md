@@ -57,6 +57,106 @@ opencv-pythonはそれをpythonで使用できるようにするバインディ�
 
 [pipで楽を追求した先人(しかし筆者の環境では躓いた)](https://qiita.com/masaru/items/658b24b0806144cfeb1c)
 
+## インストールされてるかの確認
+
+これが動けばとりあえずインストールできてる
+
+```py
+import cv2
+cv2.version
+```
+
+## 実際に試してみたインストール方法
+
+pipを使ったインストールを試してみました。
+OSのバージョンの違い、OpenCVのバージョンの違いで必ずしもこれで成功するとは限りません！
+失敗したら笑いましょう。
+
+### バージョン確認
+
+```
+-> % lsb_release -a
+No LSB modules are available.
+Distributor ID:	Raspbian
+Description:	Raspbian GNU/Linux 9.11 (stretch)
+Release:	9.11
+Codename:	stretch
+```
+
+早速公式ドキュメントを参考にインストールしてみましょう
+
+```
+$ pip install opencv-python
+$ pip install opencv-contrib-python
+```
+
+⚠️注意⚠️
+
+`pip install`でエラーが起きたら
+
+```
+-> % pip install opencv-python
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Requirement already satisfied: opencv-python in /usr/local/lib/python3.5/dist-packages (3.4.4.19)
+Requirement already satisfied: numpy>=1.12.1 in /usr/lib/python3/dist-packages (from opencv-python) (1.12.1)
+WARNING: You are using pip version 19.3; however, version 19.3.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+```
+
+こんなのが出たら、pipのバージョンが違うので怒られてます。最後の行の通りに +sudo をつけて`sudo pip install --upgrade pip`を打ってみましょう。
+sudoつけてなかったら多分許可がありません的なので怒られると思います
+
+早速やってみるぞ〜
+
+```
+-> % python3
+Python 3.5.3 (default, Sep 27 2018, 17:25:39)
+[GCC 6.3.0 20170516] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import cv2
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/lib/python3.5/dist-packages/cv2/__init__.py", line 3, in <module>
+    from .cv2 import *
+ImportError: libhdf5_serial.so.100: cannot open shared object file: No such file or directory
+```
+
+ドキュメント通りにやったら怒られました。最後の行をみてみると、`libhdf5_serial.so.100`てのがなさそうです。
+`libhdf5-100`でググると、[こんなサイトを見つけました](https://qiita.com/atuyosi/items/5f73baa08c3408f248e8)
+どうやら`apt install`でインストールが必要なライブラリがあるそうです。
+
+`apt search`でライブラリを探してみます
+
+```
+-> % sudo apt search libhdf5-100
+ソート中... 完了
+全文検索... 完了
+libhdf5-100/oldstable 1.10.0-patch1+docs-3+deb9u1 armhf
+  Hierarchical Data Format 5 (HDF5) - runtime files - serial version
+```
+
+`libhdf5-100/oldstable`てのがライブラリにあるそうです。これをインストールしてみます。
+
+`sudo apt install libhdf5-100/oldstable -y` (-yコマンドがあれば一発でインストールしてくれます)
+
+さあできるかな？？
+
+```
+-> % python3
+Python 3.5.3 (default, Sep 27 2018, 17:25:39)
+[GCC 6.3.0 20170516] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import cv2
+>>> cv2.version
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: module 'cv2.cv2' has no attribute 'version'
+>>> cv2.__version__
+'3.4.4'
+```
+
+**できたあああああああ**
+
 ## その他役立ちそうな参考サイト
 
 [OpenCVインストール](https://qiita.com/takahiro_itazuri/items/a67dd3bb7f5f88ca9dd8#compile-and-install-opencv)

@@ -157,6 +157,10 @@ AttributeError: module 'cv2.cv2' has no attribute 'version'
 
 **できたあああああああ**
 
+こんな感じで、エラーとの戦いです。
+エラーと友達になりましょう。 ~~ｴﾗｰｺﾜｸﾅｰｲ~~
+OpenCVはなぜかインストールが難しかった・・・
+
 ## その他役立ちそうな参考サイト
 
 [OpenCVインストール](https://qiita.com/takahiro_itazuri/items/a67dd3bb7f5f88ca9dd8#compile-and-install-opencv)

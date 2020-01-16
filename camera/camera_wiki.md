@@ -122,7 +122,9 @@ ImportError: libhdf5_serial.so.100: cannot open shared object file: No such file
 ```
 
 ドキュメント通りにやったら怒られました。最後の行をみてみると、`libhdf5_serial.so.100`てのがなさそうです。
+
 `libhdf5-100`でググると、[こんなサイトを見つけました](https://qiita.com/atuyosi/items/5f73baa08c3408f248e8)
+
 どうやら`apt install`でインストールが必要なライブラリがあるそうです。
 
 `apt search`でライブラリを探してみます

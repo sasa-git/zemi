@@ -31,7 +31,7 @@ with picamera.PiCamera() as camera:
             # cv2.imshow('th4', th4)
             text = 'now threshold: ' + str(ret4)
             color = cv2.cvtColor(th4, cv2.COLOR_GRAY2BGR)
-            vi = cv2.putText(color,text,(10,10),cv2.FONT_HERSHEY_PLAIN, 1,(255,255,0))
+            vi = cv2.putText(color,text,(10,10),cv2.FONT_HERSHEY_PLAIN, 1,(100,100,255))
             cv2.imshow('gaussian otsu', vi)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):

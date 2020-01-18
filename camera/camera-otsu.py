@@ -26,7 +26,7 @@ with picamera.PiCamera() as camera:
 
             # ガウスフィルタを通した大津の二値化
             # アルゴリズムが自動的にしきい値を計算し てくれ，二つ目の出力値であるretVal として返してくれます．大津の二値化を使わない場合， retVal の値は入力引数に指定したしきい値と同じ値になる
-            blur = cv2.GaussianBlur(array , (5,5), 0)
+            blur = cv2.GaussianBlur(gray , (5,5), 0)
             (ret4, th4) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY+cv2.THRESH_OTSU)
             # cv2.imshow('th4', th4)
             vi = cv2.putText(th4,ret4,(10,10),cv2.FONT_HERSHEY_PLAIN, 5,(255,255,0))

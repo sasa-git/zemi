@@ -30,7 +30,7 @@ with picamera.PiCamera() as camera:
             (ret4, th4) = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY+cv2.THRESH_OTSU)
             # cv2.imshow('th4', th4)
             text = str(ret4)
-            vi = cv2.putText(th4,text,(10,10),cv2.FONT_HERSHEY_PLAIN, 5,(255,255,0))
+            vi = cv2.putText(th4,text,(10,10),cv2.FONT_HERSHEY_PLAIN, 1,(255,255,0))
             cv2.imshow('th4', vi)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
